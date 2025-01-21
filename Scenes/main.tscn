@@ -1,14 +1,90 @@
-[gd_scene load_steps=2 format=3 uid="uid://cf27xuv5bn8yp"]
+[gd_scene load_steps=5 format=3 uid="uid://cf27xuv5bn8yp"]
 
 [ext_resource type="Script" path="res://Src/main.gd" id="1_2n83w"]
+[ext_resource type="Script" path="res://Scripts/GameManager.gd" id="2_2f113"]
+[ext_resource type="Texture2D" uid="uid://bwyet56ssod52" path="res://Assets/image.png" id="2_d4r3n"]
+[ext_resource type="Script" path="res://Scripts/BarManager.gd" id="4_x6dr4"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_2n83w")
 
-[node name="GUI" type="Control" parent="."]
+[node name="GameManager" type="Node2D" parent="."]
+script = ExtResource("2_2f113")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(573, 321)
+scale = Vector2(1.0572, 0.665982)
+texture = ExtResource("2_d4r3n")
+
+[node name="UI" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+script = ExtResource("4_x6dr4")
 
-[node name="Environment" type="Node2D" parent="."]
+[node name="PowerBar" type="ProgressBar" parent="UI"]
+offset_left = 2.0
+offset_top = 30.0
+offset_right = 175.0
+offset_bottom = 57.0
+step = 1.0
+value = 10.0
+show_percentage = false
+
+[node name="HungerBar" type="ProgressBar" parent="UI"]
+offset_left = 2.0
+offset_top = 84.0
+offset_right = 174.0
+offset_bottom = 111.0
+step = 1.0
+value = 50.0
+show_percentage = false
+
+[node name="AttentionBar" type="ProgressBar" parent="UI"]
+offset_left = 3.0
+offset_top = 136.0
+offset_right = 175.0
+offset_bottom = 163.0
+step = 1.0
+value = 10.0
+show_percentage = false
+
+[node name="DialogBox" type="Panel" parent="UI"]
+offset_left = 323.0
+offset_top = 141.0
+offset_right = 777.0
+offset_bottom = 279.0
+
+[node name="Label" type="Label" parent="UI/DialogBox"]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 24.0
+offset_right = 432.0
+offset_bottom = 119.0
+
+[node name="YesButton" type="Button" parent="UI"]
+offset_left = 416.0
+offset_top = 473.0
+offset_right = 687.0
+offset_bottom = 518.0
+text = "Accept"
+
+[node name="NoButton" type="Button" parent="UI"]
+offset_left = 414.0
+offset_top = 527.0
+offset_right = 687.0
+offset_bottom = 566.0
+text = "Deny
+"
+
+[node name="NomButton" type="Button" parent="UI"]
+offset_left = 920.0
+offset_top = 473.0
+offset_right = 1068.0
+offset_bottom = 548.0
+text = "NOM"
+
+[connection signal="pressed" from="UI/YesButton" to="." method="_on_yes_button_pressed"]
+[connection signal="pressed" from="UI/NoButton" to="." method="_on_no_button_pressed"]
+[connection signal="pressed" from="UI/NomButton" to="." method="_on_nom_button_pressed"]
